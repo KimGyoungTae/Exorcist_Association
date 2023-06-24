@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ae45c0945f3e64489856d3f6254026e, type: 3}
-  m_Name: ItemPack
+  m_Name: Knife
   m_EditorClassIdentifier: 
-  itemName: "\uBABB"
-  itemImage: {fileID: 21300000, guid: bb13d66dad309c24f82e7aace5409603, type: 3}
+  itemName: "\uCE7C"
+  itemImage: {fileID: 21300000, guid: c26b282827623b54fa992aa55469eb75, type: 3}

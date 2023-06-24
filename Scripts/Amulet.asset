@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ae45c0945f3e64489856d3f6254026e, type: 3}
-  m_Name: ItemPack
+  m_Name: Amulet
   m_EditorClassIdentifier: 
-  itemName: "\uBABB"
-  itemImage: {fileID: 21300000, guid: bb13d66dad309c24f82e7aace5409603, type: 3}
+  itemName: "\uBD80\uC801"
+  itemImage: {fileID: 21300000, guid: c155929f006cf0744b3781c7dbe5b642, type: 3}
