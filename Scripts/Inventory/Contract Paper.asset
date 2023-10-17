@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e44a749260294498b7dfb05eb6ee03, type: 3}
+  m_Name: Contract Paper
+  m_EditorClassIdentifier: 
+  id: 1
+  itemName: "\uC7AC\uAC1C\uBC1C \uC6A9\uC9C0"
+  itemType: "\uC99D\uAC70\uD488"
+  icon: {fileID: 21300000, guid: 8fcaec05c7cafea4ca168a465b0e8f1b, type: 3}
+  itemInfo: "\uC774 \uC6A9\uC9C0\uB294 \uCD94\uB9AC \uC2DC \uC720\uC6A9\uD55C \uC99D\uAC70\uAC00
+    \uB420 \uAC83 \uAC19\uB2E4."
