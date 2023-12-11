@@ -1,0 +1,72 @@
+{
+  "FWOH": [
+    {
+        "TabType": "Who",
+        "Answer1": "공사장 인부",
+        "Answer2": "부동산 업자",
+        "Answer3": "학원 선생님",
+        "Answer4": "꽃집 주인",
+        "Answer5": "낯선 남자",
+        "Answer6": "할머니",
+        "Answer7": "할아버지",
+        "Answer8": "카페 주인",
+        "Answer9": "지나가던 개"
+    },
+    {
+      "TabType": "When",
+      "Answer1": "1개월 전",
+      "Answer2": "3개월 전",
+      "Answer3": "6개월 전",
+      "Answer4": "1년 전",
+      "Answer5": "3년 전",
+      "Answer6": "10년 전"
+      
+    },
+    {
+        "TabType": "Where",
+        "Answer1": "학원가",
+        "Answer2": "공사장",
+        "Answer3": "부동산",
+        "Answer4": "주택가",
+        "Answer5": "공터",
+        "Answer6": "꽃집",
+        "Answer7": "카페",
+        "Answer8": "학교"
+    },
+    {
+        "TabType": "How",
+        "Answer1": "폭사",
+        "Answer2": "약물중독",
+        "Answer3": "압사",
+        "Answer4": "심장마비",
+        "Answer5": "관통상",
+        "Answer6": "과다출혈",
+        "Answer7": "총상",
+        "Answer8": "뇌졸중",
+        "Answer9": "아사"
+
+    },
+    {
+        "TabType": "What",
+        "Answer1": "재개발",
+        "Answer2": "아파트",
+        "Answer3": "공터",
+        "Answer4": "낯선 남자",
+        "Answer5": "부동산",
+        "Answer6": "아이들",
+        "Answer7": "학원가",
+        "Answer8": "신문",
+        "Answer9": "전단지"
+    },
+    {
+      "TabType": "Why",
+      "Answer1": "미",
+      "Answer2": "안",
+      "Answer3": "합",
+      "Answer4": "니",
+      "Answer5": "다",
+      "Answer6": "고",
+      "Answer7": "갈"
+    }
+  ]
+}
