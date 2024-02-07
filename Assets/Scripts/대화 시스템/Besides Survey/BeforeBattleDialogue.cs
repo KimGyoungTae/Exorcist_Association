@@ -104,7 +104,7 @@ public class BeforeBattleDialogue : TextDialogSystem
 
                             if (lineCount == 6)
                             {
-                             //   Debug.Log("맵 변화");
+                                //   Debug.Log("맵 변화");
                                 ChangeScene();
                             }
 
@@ -138,48 +138,18 @@ public class BeforeBattleDialogue : TextDialogSystem
     {
         if (dialogues[lineCount].name == "차지원")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = true;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(false, true, false);
         }
 
 
         else if (dialogues[lineCount].name == "강혜성")
         {
-            KHSStateOnOff = true;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(true, false, false);
         }
 
         else if (dialogues[lineCount].name == "현우")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = true;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(false, false, true);
         }
 
         else if (dialogues[lineCount].name == "건물주 귀신")
@@ -197,17 +167,26 @@ public class BeforeBattleDialogue : TextDialogSystem
 
     }
 
+
+    void ManageChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_HWooStateOnOff)
+    {
+        KHSStateOnOff = parm_KHSStateOnOff;
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        HWooStateOnOff = parm_HWooStateOnOff;
+        Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
+        HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+    }
+
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
-        KHSStateOnOff = false;
-        CJWStateOnOff = true;
-        HWooStateOnOff = false;
-
-        // 초기 캐릭터 이미지 설정
-        KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[0];
-        CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[1];
-        HWoo.GetComponent<SpriteRenderer>().sprite = HWooOnOffSprites[1];
+        ManageChangeState(true, false, false);
     }
 
 

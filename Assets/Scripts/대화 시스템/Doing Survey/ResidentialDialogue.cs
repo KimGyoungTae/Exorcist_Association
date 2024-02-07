@@ -91,7 +91,7 @@ public class ResidentialDialogue : TextDialogSystem
                             ShowDialogueName();
 
                             if (lineCount == 2)
-                            {  
+                            {
                                 ChangeScene();
                             }
                         }
@@ -130,43 +130,38 @@ public class ResidentialDialogue : TextDialogSystem
     {
         if (dialogues[lineCount].name == "어떤 남자")
         {
-            // 강햬성의 상태를 변경합니다.
-            KHSStateOnOff = false;
-            // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            ResidentialNPCOnOff = true;
-            Sprite NPCSprite = ResidentialNPCOnOffSprites[ResidentialNPCOnOff ? 0 : 1];
-            ResidentialNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+            ManageChangeState(false, true);
         }
 
 
         else if (dialogues[lineCount].name == "강혜성")
         {
-            KHSStateOnOff = true;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            ResidentialNPCOnOff = false;
-            Sprite NPCSprite = ResidentialNPCOnOffSprites[ResidentialNPCOnOff ? 0 : 1];
-            ResidentialNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+            ManageChangeState(true, false);
         }
 
         else Debug.Log("캐릭터 상태 변화가 이루어지지 않습니다.");
-
     }
+
+
+    void ManageChangeState(bool parm_KHSStateOnOff, bool parm_ResidentialNPCOnOff)
+    {
+        // 강햬성의 상태를 변경합니다.
+        KHSStateOnOff = parm_KHSStateOnOff;
+        // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        ResidentialNPCOnOff = parm_ResidentialNPCOnOff;
+        Sprite NPCSprite = ResidentialNPCOnOffSprites[ResidentialNPCOnOff ? 0 : 1];
+        ResidentialNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+    }
+
 
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
-        KHSStateOnOff = false;
-        ResidentialNPCOnOff = false;
-
-        // 초기 캐릭터 이미지 설정
-        KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-        ResidentialNPC.GetComponent<SpriteRenderer>().sprite = ResidentialNPCOnOffSprites[1];
+        ManageChangeState(false, false);
     }
 
     public void ClickSkipButton()

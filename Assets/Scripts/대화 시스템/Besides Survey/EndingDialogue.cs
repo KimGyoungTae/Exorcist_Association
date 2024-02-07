@@ -97,7 +97,7 @@ public class EndingDialogue : TextDialogSystem
 
                         if (lineCount == 25 && contextCount == 2)
                         {
-                         //   Debug.Log("할머니 컷신 2");
+                            //   Debug.Log("할머니 컷신 2");
                             SecondGrandMotherRememberCutScene();
                         }
                     }
@@ -110,26 +110,26 @@ public class EndingDialogue : TextDialogSystem
                         if (++lineCount < dialogues.Length)
                         {
                             StartCoroutine(TypeWriter());
-                            
+
                             if (lineCount == 12)
                             {
-                            //    Debug.Log("컷신 재생.");
+                                //    Debug.Log("컷신 재생.");
                                 ActiveCutScene();
                             }
 
-                            if(lineCount == 20)
+                            if (lineCount == 20)
                             {
-                           //     Debug.Log("할머니 컷신 1");
+                                //     Debug.Log("할머니 컷신 1");
                                 FirstGrandMotherRememberCutScene();
                             }
 
-                            if(lineCount == 26)
+                            if (lineCount == 26)
                             {
-                            //    Debug.Log("마지막 엔딩 컷신");
+                                //    Debug.Log("마지막 엔딩 컷신");
                                 FinalCutScene();
                             }
 
-                            if(lineCount == 28)
+                            if (lineCount == 28)
                             {
                                 CharactorOff(true);
                             }
@@ -161,48 +161,19 @@ public class EndingDialogue : TextDialogSystem
     {
         if (dialogues[lineCount].name == "차지원")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = true;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(false, true, false);
         }
 
 
         else if (dialogues[lineCount].name == "강혜성")
         {
-            KHSStateOnOff = true;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(true, false, false);
         }
 
         else if (dialogues[lineCount].name == "현우")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+            ManageChangeState(false, false, true);
 
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = true;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
         }
 
         else
@@ -215,17 +186,25 @@ public class EndingDialogue : TextDialogSystem
 
     }
 
+    void ManageChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_HWooStateOnOff)
+    {
+        KHSStateOnOff = parm_KHSStateOnOff;
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        HWooStateOnOff = parm_HWooStateOnOff;
+        Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
+        HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+    }
+
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
-        KHSStateOnOff = false;
-        CJWStateOnOff = true;
-        HWooStateOnOff = false;
-
-        // 초기 캐릭터 이미지 설정
-        KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[0];
-        CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[1];
-        HWoo.GetComponent<SpriteRenderer>().sprite = HWooOnOffSprites[1];
+        ManageChangeState(true, false, false);
     }
 
 
@@ -265,7 +244,7 @@ public class EndingDialogue : TextDialogSystem
         LeanTween.alpha(FinalBackGround, 1f, 1f).setDelay(1f);
     }
 
-   
+
 
     public override void ChangeCharacterUI(string tag, string name)
     {

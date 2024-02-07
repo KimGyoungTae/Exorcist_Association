@@ -29,7 +29,7 @@ public class SchoolDialogue : TextDialogSystem
     private ManageSceneTransition sceneTransition;
     public InteractionEvent interactionEvent;
 
-  
+
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class SchoolDialogue : TextDialogSystem
         }
     }
 
-   
+
     void Update()
     {
         // 대화 진행도를 체크하는 부분도 Update()에서 처리합니다.
@@ -65,7 +65,7 @@ public class SchoolDialogue : TextDialogSystem
         startInteraction = true;
         if (startInteraction == true)
         {
-          //  Debug.Log(dialogues[lineCount].name);
+            //  Debug.Log(dialogues[lineCount].name);
             ShowDialogueName();
             startInteraction = false;
         }
@@ -100,7 +100,7 @@ public class SchoolDialogue : TextDialogSystem
                         if (++lineCount < dialogues.Length)
                         {
                             StartCoroutine(TypeWriter());
-                      //    Debug.Log(dialogues[lineCount].name);
+                            //    Debug.Log(dialogues[lineCount].name);
 
                             ChangeCharactoreImage();
                             ShowDialogueName();
@@ -112,7 +112,7 @@ public class SchoolDialogue : TextDialogSystem
                             EndDialogue();
                             // 모든 대사 출력 끝날 시 지도 페이지로 씬 이동 
                             sceneTransition.FadeScene(4);
- 
+
                         }
                     }
                 }
@@ -126,65 +126,43 @@ public class SchoolDialogue : TextDialogSystem
     {
         if (dialogues[lineCount].name == "차지원")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = true;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(false, true, false);
         }
 
 
         else if (dialogues[lineCount].name == "강혜성")
         {
-            KHSStateOnOff = true;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = false;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(true, false, false);
         }
 
         else if (dialogues[lineCount].name == "현 우")
         {
-            KHSStateOnOff = false;
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            HWooStateOnOff = true;
-            Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+            ManageChangeState(false, false, true);
         }
 
         else Debug.Log("캐릭터 상태 변화가 이루어지지 않습니다.");
 
     }
 
+    void ManageChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_HWooStateOnOff)
+    {
+        KHSStateOnOff = parm_KHSStateOnOff;
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        HWooStateOnOff = parm_HWooStateOnOff;
+        Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
+        HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+    }
+
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
-        KHSStateOnOff = false;
-        CJWStateOnOff = true;
-        HWooStateOnOff = false;
-
-        // 초기 캐릭터 이미지 설정
-        KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-        CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[0];
-        HWoo.GetComponent<SpriteRenderer>().sprite = HWooOnOffSprites[1];
+        ManageChangeState(false, true, false);
     }
 
 

@@ -40,7 +40,7 @@ public class StreetDialogue : TextDialogSystem
 
     private bool skipAction = false;
 
-   
+
 
     void Start()
     {
@@ -100,7 +100,7 @@ public class StreetDialogue : TextDialogSystem
                         if (++lineCount < dialogues.Length)
                         {
                             StartCoroutine(TypeWriter());
-                            Debug.Log(dialogues[lineCount].name);
+                            //   Debug.Log(dialogues[lineCount].name);
 
                             ChangeCharactoreImage();
                             ShowDialogueName();
@@ -172,64 +172,21 @@ public class StreetDialogue : TextDialogSystem
     // 현재 대화 하는 사람의 이름을 파악하여 알맞은 상태변화로 이어지게 함.
     void ChangeCharactoreImage()
     {
-        if(hit.collider.name == "영어학원")
+        if (hit.collider.name == "영어학원")
         {
             if (dialogues[lineCount].name == "강사")
             {
-                // 강햬성의 상태를 변경합니다.
-                KHSStateOnOff = false;
-                // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                // 차지원의 상태를 변경합니다.
-                CJWStateOnOff = false;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                AcademyNPCOnOff = true;
-                Sprite NPCSprite = AcademyNPCOnOffSprites[AcademyNPCOnOff ? 0 : 1];
-                AcademyNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageAcademyChangeState(false, false, true);
             }
 
             else if (dialogues[lineCount].name == "차지원")
             {
-                // 강햬성의 상태를 변경합니다.
-                KHSStateOnOff = false;
-                // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                // 차지원의 상태를 변경합니다.
-                CJWStateOnOff = true;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                AcademyNPCOnOff = false;
-                Sprite NPCSprite = AcademyNPCOnOffSprites[AcademyNPCOnOff ? 0 : 1];
-                AcademyNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageAcademyChangeState(false, true, false);
             }
 
             else if (dialogues[lineCount].name == "강혜성")
             {
-                
-                // 강햬성의 상태를 변경합니다.
-                KHSStateOnOff = true;
-                // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                // 차지원의 상태를 변경합니다.
-                CJWStateOnOff = false;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                AcademyNPCOnOff = false;
-                Sprite NPCSprite = AcademyNPCOnOffSprites[AcademyNPCOnOff ? 0 : 1];
-                AcademyNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageAcademyChangeState(true, false, false);
             }
 
             else
@@ -246,78 +203,21 @@ public class StreetDialogue : TextDialogSystem
         {
             if (dialogues[lineCount].name == "카페 주인")
             {
-                KHSStateOnOff = false;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                CJWStateOnOff = false;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                HWooStateOnOff = false;
-                Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-                HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
-
-                CafeNPCOnOff = true;
-                Sprite NPCSprite = CafeNPCOnOffSprites[CafeNPCOnOff ? 0 : 1];
-                CafeNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
-
+                ManageCafeChangeState(false, false, false, true);
             }
             else if (dialogues[lineCount].name == "현우")
             {
-                KHSStateOnOff = false;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                CJWStateOnOff = false;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                HWooStateOnOff = true;
-                Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-                HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
-
-                CafeNPCOnOff = false;
-                Sprite NPCSprite = CafeNPCOnOffSprites[CafeNPCOnOff ? 0 : 1];
-                CafeNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageCafeChangeState(false, false, true, false);
             }
 
             else if (dialogues[lineCount].name == "차지원")
             {
-                KHSStateOnOff = false;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                CJWStateOnOff = true;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                HWooStateOnOff = false;
-                Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-                HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
-
-                CafeNPCOnOff = false;
-                Sprite NPCSprite = CafeNPCOnOffSprites[CafeNPCOnOff ? 0 : 1];
-                CafeNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageCafeChangeState(false, true, false, false);
             }
 
             else if (dialogues[lineCount].name == "강혜성")
             {
-                KHSStateOnOff = true;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                CJWStateOnOff = false;
-                Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-                CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-                HWooStateOnOff = false;
-                Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
-                HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
-
-                CafeNPCOnOff = false;
-                Sprite NPCSprite = CafeNPCOnOffSprites[CafeNPCOnOff ? 0 : 1];
-                CafeNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageCafeChangeState(true, false, false, false);
             }
 
             else
@@ -331,24 +231,12 @@ public class StreetDialogue : TextDialogSystem
         {
             if (dialogues[lineCount].name == "꽃집 주인")
             {
-                KHSStateOnOff = false;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                FlowerNPCOnOff = true;
-                Sprite NPCSprite = FlowerNPCOnOffSprites[FlowerNPCOnOff ? 0 : 1];
-                FlowerNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageFlowerChangeState(false, true);
             }
 
             else if (dialogues[lineCount].name == "강혜성")
             {
-                KHSStateOnOff = true;
-                Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-                KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-                FlowerNPCOnOff = false;
-                Sprite NPCSprite = FlowerNPCOnOffSprites[FlowerNPCOnOff ? 0 : 1];
-                FlowerNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+                ManageFlowerChangeState(true, false);
             }
 
             else
@@ -361,43 +249,72 @@ public class StreetDialogue : TextDialogSystem
 
     }
 
+    void ManageAcademyChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_AcademyNPCOnOff)
+    {
+        // 강햬성의 상태를 변경합니다.
+        KHSStateOnOff = parm_KHSStateOnOff;
+        // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        // 차지원의 상태를 변경합니다.
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        AcademyNPCOnOff = parm_AcademyNPCOnOff;
+        Sprite NPCSprite = AcademyNPCOnOffSprites[AcademyNPCOnOff ? 0 : 1];
+        AcademyNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+    }
+
+    void ManageCafeChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_HWooStateOnOff, bool parm_CafeNPCOnOff)
+    {
+        KHSStateOnOff = parm_KHSStateOnOff;
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        HWooStateOnOff = parm_HWooStateOnOff;
+        Sprite HWooSprite = HWooOnOffSprites[HWooStateOnOff ? 0 : 1];
+        HWoo.GetComponent<SpriteRenderer>().sprite = HWooSprite;
+
+        CafeNPCOnOff = parm_CafeNPCOnOff;
+        Sprite NPCSprite = CafeNPCOnOffSprites[CafeNPCOnOff ? 0 : 1];
+        CafeNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+    }
+
+    void ManageFlowerChangeState(bool parm_KHSStateOnOff, bool parm_FlowerNPCOnOff)
+    {
+        KHSStateOnOff = parm_KHSStateOnOff;
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        FlowerNPCOnOff = parm_FlowerNPCOnOff;
+        Sprite NPCSprite = FlowerNPCOnOffSprites[FlowerNPCOnOff ? 0 : 1];
+        FlowerNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+    }
+
+
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
         if (hit.collider.name == "영어학원")
         {
-            KHSStateOnOff = false;
-            CJWStateOnOff = true;
-            AcademyNPCOnOff = false;
-
-            // 초기 캐릭터 이미지 설정
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[0];
-            AcademyNPC.GetComponent<SpriteRenderer>().sprite = AcademyNPCOnOffSprites[1];
+            ManageAcademyChangeState(false, true, false);
         }
 
         else if (hit.collider.name == "카페")
         {
-            KHSStateOnOff = false;
-            CJWStateOnOff = false;
-            CafeNPCOnOff = false;
-            HWooStateOnOff = false;
-
-            // 초기 캐릭터 이미지 설정
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[1];
-            CafeNPC.GetComponent<SpriteRenderer>().sprite = CafeNPCOnOffSprites[1];
-            HWoo.GetComponent<SpriteRenderer>().sprite = HWooOnOffSprites[1];
+            ManageCafeChangeState(false, false, false, false);
         }
 
         else if (hit.collider.name == "꽃집")
         {
-            KHSStateOnOff = false;
-            FlowerNPCOnOff = false;
-
-            // 초기 캐릭터 이미지 설정
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-            FlowerNPC.GetComponent<SpriteRenderer>().sprite = FlowerNPCOnOffSprites[1];
+            ManageFlowerChangeState(false, false);
         }
 
         else Debug.Log("콜라이더 이름을 찾을 수 없습니다");

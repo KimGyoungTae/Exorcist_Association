@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class EstateDialogue : TextDialogSystem
 {
@@ -48,7 +48,7 @@ public class EstateDialogue : TextDialogSystem
         }
     }
 
- 
+
     void Update()
     {
         CheckDialogueState();
@@ -60,7 +60,7 @@ public class EstateDialogue : TextDialogSystem
         // 실행되어 있는 코루틴을 모두 종료하면서, 데이터가 Text에 갱신되는 문제를 방지함.
         if (skipAction)
         {
-          //  Debug.Log("스킵 발동");
+            //  Debug.Log("스킵 발동");
             StopAllCoroutines();
             skipAction = false;
             return;
@@ -92,7 +92,7 @@ public class EstateDialogue : TextDialogSystem
                         if (++lineCount < dialogues.Length)
                         {
                             StartCoroutine(TypeWriter());
-                         //   Debug.Log(dialogues[lineCount].name);
+                            //   Debug.Log(dialogues[lineCount].name);
 
                             ChangeCharactoreImage();
                             ShowDialogueName();
@@ -117,7 +117,7 @@ public class EstateDialogue : TextDialogSystem
 
     public override void ChangeCharacterUI(string tag, string name)
     {
-        if(tag == "Item")
+        if (tag == "Item")
         {
             CharactorOff(false);
 
@@ -137,7 +137,7 @@ public class EstateDialogue : TextDialogSystem
             else Debug.Log("백그라운드 오브젝트가 존재하지 않습니다..");
         }
 
-        if(tag == "NPC")
+        if (tag == "NPC")
         {
             CharactorOff(isDialogue);
         }
@@ -177,76 +177,44 @@ public class EstateDialogue : TextDialogSystem
     {
         if (dialogues[lineCount].name == "부동산 업자")
         {
-            // 강햬성의 상태를 변경합니다.
-            KHSStateOnOff = false;
-            // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            // 차지원의 상태를 변경합니다.
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            EstateNPCOnOff = true;
-            Sprite NPCSprite = EstateNPCOnOffSprites[EstateNPCOnOff ? 0 : 1];
-            EstateNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+            ManageChangeState(false, false, true);
         }
 
         else if (dialogues[lineCount].name == "차지원")
         {
-            // 강햬성의 상태를 변경합니다.
-            KHSStateOnOff = false;
-            // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            // 차지원의 상태를 변경합니다.
-            CJWStateOnOff = true;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            EstateNPCOnOff = false;
-            Sprite NPCSprite = EstateNPCOnOffSprites[EstateNPCOnOff ? 0 : 1];
-            EstateNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+            ManageChangeState(false, true, false);
         }
 
         else if (dialogues[lineCount].name == "강혜성")
         {
-            // 강햬성의 상태를 변경합니다.
-            KHSStateOnOff = true;
-            // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
-            Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
-            // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
-            KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
-
-            // 차지원의 상태를 변경합니다.
-            CJWStateOnOff = false;
-            Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
-            CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
-
-            EstateNPCOnOff = false;
-            Sprite NPCSprite = EstateNPCOnOffSprites[EstateNPCOnOff ? 0 : 1];
-            EstateNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
+            ManageChangeState(true, false, false);
         }
-
         else Debug.Log("캐릭터 상태 변화를 등록하지 않았습니다");
+    }
 
+    void ManageChangeState(bool parm_KHSStateOnOff, bool parm_CJWStateOnOff, bool parm_EstateNPCOnOff)
+    {
+        // 강햬성의 상태를 변경합니다.
+        KHSStateOnOff = parm_KHSStateOnOff;
+        // true이면 0번 인덱스의 On 이미지를, false이면 1번 인덱스의 Off 이미지를 가져옵니다.
+        Sprite KHSSprite = KHSOnOffSprites[KHSStateOnOff ? 0 : 1];
+        // 강혜성의 SpriteRenderer를 사용하여 이미지를 변경합니다.
+        KHS.GetComponent<SpriteRenderer>().sprite = KHSSprite;
+
+        // 차지원의 상태를 변경합니다.
+        CJWStateOnOff = parm_CJWStateOnOff;
+        Sprite CJWSprite = CJWOnOffSprites[CJWStateOnOff ? 0 : 1];
+        CJW.GetComponent<SpriteRenderer>().sprite = CJWSprite;
+
+        EstateNPCOnOff = parm_EstateNPCOnOff;
+        Sprite NPCSprite = EstateNPCOnOffSprites[EstateNPCOnOff ? 0 : 1];
+        EstateNPC.GetComponent<SpriteRenderer>().sprite = NPCSprite;
     }
 
     // 대화 시작 시 캐릭터 상태 초기화 함수
     void InitializeCharacterState()
     {
-        KHSStateOnOff = false;
-        CJWStateOnOff = false;
-        EstateNPCOnOff = true;
-
-        // 초기 캐릭터 이미지 설정
-        KHS.GetComponent<SpriteRenderer>().sprite = KHSOnOffSprites[1];
-        CJW.GetComponent<SpriteRenderer>().sprite = CJWOnOffSprites[1];
-        EstateNPC.GetComponent<SpriteRenderer>().sprite = EstateNPCOnOffSprites[0];
+        ManageChangeState(false, false, true);
     }
 
     public void ClickSkipButton()
@@ -293,5 +261,5 @@ public class EstateDialogue : TextDialogSystem
         base.SettingUI(isAction);
     }
 
-    
+
 }
