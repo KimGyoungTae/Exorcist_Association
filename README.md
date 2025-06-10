@@ -1,4 +1,4 @@
-# 전국퇴마사협회(Korean Exorcist Association)
+# 전국퇴마사협회(National Exorcist Association)
  ![image](https://github.com/KimGyoungTae/Public_TheAssociation_of_Exorcists/assets/83820089/5e55844a-a641-433c-b994-b7e760234af5)
 <br>
 
@@ -10,7 +10,7 @@
 
 팀 명 : 팀 다다
 
-프로젝트 명 : 전국퇴마사협회(Korean Exorcist Association)
+프로젝트 명 : 전국퇴마사협회(National Exorcist Association)
 
 게임 플랫폼 : PC
 
